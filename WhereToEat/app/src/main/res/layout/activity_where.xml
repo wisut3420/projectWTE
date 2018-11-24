@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".where">
+
+
+    <TextView
+        android:id="@+id/restaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/ekkamai"
+        android:textSize="25dp"
+        android:text="" />
+
+    <RelativeLayout
+        android:layout_width="330dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp">
+
+        <TextView
+            android:id="@+id/txtOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ekkamai"
+            android:textSize="20dp"
+            android:text="เวลาทำการ"/>
+
+        <TextView
+            android:id="@+id/opentime"
+            android:layout_below="@+id/txtOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ekkamai"
+            android:textSize="20dp"
+            android:text=""/>
+
+        <TextView
+            android:id="@+id/txtMenu"
+            android:layout_below="@id/opentime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ekkamai"
+            android:textSize="20dp"
+            android:text="เมนูที่แนะนำ"/>
+
+        <TextView
+            android:layout_below="@+id/txtMenu"
+            android:id="@+id/recmenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ekkamai"
+            android:textSize="20dp"
+            android:text=""/>
+
+        <TextView
+            android:id="@+id/txtPrice"
+            android:layout_below="@id/recmenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ekkamai"
+            android:textSize="20dp"
+            android:text="ช่วงราคา"/>
+
+        <TextView
+            android:id="@+id/pricerate"
+            android:layout_below="@+id/txtPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ekkamai"
+            android:textSize="20dp"
+            android:text=""/>
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/btnMap"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="420dp"
+        android:background="@drawable/mapmark"/>
+
+</RelativeLayout>

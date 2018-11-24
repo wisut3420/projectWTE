@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".choosefood">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="25dp"
+        android:text="เลือกอาหาร"
+        android:fontFamily="@font/ekkamai"/>
+
+    <CheckBox
+        android:id="@+id/shabu"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="ชาบู"
+        android:fontFamily="@font/ekkamai"/>
+
+    <CheckBox
+        android:id="@+id/bbq"
+        android:layout_below="@+id/shabu"
+        android:layout_marginLeft="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="หมูกระทะ"
+        android:fontFamily="@font/ekkamai"/>
+
+    <CheckBox
+        android:id="@+id/alacarte"
+        android:layout_below="@+id/bbq"
+        android:layout_marginLeft="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="อาหารตามสั่ง"
+        android:fontFamily="@font/ekkamai"/>
+
+    <CheckBox
+        android:id="@+id/noodle"
+        android:layout_below="@+id/alacarte"
+        android:layout_marginLeft="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="ก๋วยเตี๋ยว"
+        android:fontFamily="@font/ekkamai"/>
+
+    <Button
+        android:id="@+id/choosefood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="120dp"
+        android:fontFamily="@font/ekkamai"
+        android:textSize="30dp"
+        android:text="กินนี่แหละ" />
+
+    <Button
+        android:id="@+id/ranwfood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/ekkamai"
+        android:layout_marginTop="490dp"
+        android:textSize="50dp"
+        android:text="คิดไม่ออก" />
+
+</RelativeLayout>

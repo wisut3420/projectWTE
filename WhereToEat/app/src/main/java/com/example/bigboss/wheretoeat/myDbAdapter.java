@@ -3,6 +3,7 @@ package com.example.bigboss.wheretoeat;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -75,6 +76,84 @@ public class myDbAdapter {
         return "2"; //Maybe No Username
     }
 
+    public long addRestaurant(String name, String type,String time,String recommend,String price,String lat,String longt)
+    {
+        SQLiteDatabase dbb = myhelper.getWritableDatabase();
+
+
+        String[] columns = {myDbHelper.UID2,myDbHelper.RESTNAME,myDbHelper.TYPE,myDbHelper.TIME,myDbHelper.RECOMMEND,myDbHelper.PRICE,myDbHelper.LAT,myDbHelper.LONG};
+
+        Cursor cursor =dbb.query(myDbHelper.TABLE_NAME2,columns,null,null,null,null,null);
+        while (cursor.moveToNext())
+        {
+            int cid =cursor.getInt(cursor.getColumnIndex(myDbHelper.UID2));
+            String nameindb =cursor.getString(cursor.getColumnIndex(myDbHelper.RESTNAME));
+            if (nameindb.equals(name)){
+                return 0;
+            }
+        }
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(myDbHelper.RESTNAME, name);
+        contentValues.put(myDbHelper.TYPE, type);
+        contentValues.put(myDbHelper.TIME, time);
+        contentValues.put(myDbHelper.RECOMMEND, recommend);
+        contentValues.put(myDbHelper.PRICE, price);
+        contentValues.put(myDbHelper.LAT, lat);
+        contentValues.put(myDbHelper.LONG, longt);
+        long id = dbb.insert(myDbHelper.TABLE_NAME2, null , contentValues);
+        return id;
+    }
+
+
+    public String getDataRest()
+    {
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        String[] columns = {myDbHelper.UID2,myDbHelper.RESTNAME,myDbHelper.TYPE,myDbHelper.TIME,myDbHelper.RECOMMEND,myDbHelper.PRICE,myDbHelper.LAT,myDbHelper.LONG};
+        Cursor cursor =db.query(myDbHelper.TABLE_NAME2,columns,null,null,null,null,null);
+        StringBuffer buffer= new StringBuffer();
+        while (cursor.moveToNext())
+        {
+            int cid =cursor.getInt(cursor.getColumnIndex(myDbHelper.UID2));
+            String nameindb =cursor.getString(cursor.getColumnIndex(myDbHelper.RESTNAME));
+            String type =cursor.getString(cursor.getColumnIndex(myDbHelper.TYPE));
+            String time =cursor.getString(cursor.getColumnIndex(myDbHelper.TIME));
+            String recommend =cursor.getString(cursor.getColumnIndex(myDbHelper.RECOMMEND));
+            String price =cursor.getString(cursor.getColumnIndex(myDbHelper.PRICE));
+            String lat =cursor.getString(cursor.getColumnIndex(myDbHelper.LAT));
+            String longt =cursor.getString(cursor.getColumnIndex(myDbHelper.LONG));
+            buffer.append(nameindb);
+        }
+        return buffer.toString();
+    }
+
+    public String showRestaurant()
+    {
+        SQLiteDatabase db2 = myhelper.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db2, myDbHelper.TABLE_NAME2);
+        db2.close();
+
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        String[] columns = {myDbHelper.UID2,myDbHelper.RESTNAME,myDbHelper.TYPE,myDbHelper.TIME,myDbHelper.RECOMMEND,myDbHelper.PRICE,myDbHelper.LAT,myDbHelper.LONG};
+        Cursor cursor =db.query(myDbHelper.TABLE_NAME2,columns,null,null,null,null,null);
+        StringBuffer buffer= new StringBuffer();
+
+        while (cursor.moveToNext())
+        {
+            int cid =cursor.getInt(cursor.getColumnIndex(myDbHelper.UID2));
+            String nameindb =cursor.getString(cursor.getColumnIndex(myDbHelper.RESTNAME));
+            String type =cursor.getString(cursor.getColumnIndex(myDbHelper.TYPE));
+            String time =cursor.getString(cursor.getColumnIndex(myDbHelper.TIME));
+            String recommend =cursor.getString(cursor.getColumnIndex(myDbHelper.RECOMMEND));
+            String price =cursor.getString(cursor.getColumnIndex(myDbHelper.PRICE));
+            String lat =cursor.getString(cursor.getColumnIndex(myDbHelper.LAT));
+            String longt =cursor.getString(cursor.getColumnIndex(myDbHelper.LONG));
+
+            buffer.append(nameindb+" ");
+        }
+        return buffer.toString();
+    }
+
     /*public  int delete(String uname)
     {
         SQLiteDatabase db = myhelper.getWritableDatabase();
@@ -103,11 +182,27 @@ public class myDbAdapter {
         private static final String UID="_id";     // Column I (Primary Key)
         private static final String USERNAME = "Username";    //Column II
         private static final String MyPASSWORD= "Password";    // Column III
-
         private static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+
                 " ("+UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+USERNAME+" VARCHAR(255) ,"+ MyPASSWORD+" VARCHAR(225));";
-
         private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_NAME;
+
+
+        private static final String TABLE_NAME2 = "restaurant";   // Table Name
+        private static final String UID2="id";     // Column I (Primary Key)
+        private static final String RESTNAME = "name";    //Column II
+        private static final String TYPE= "type";    // Column III
+        private static final String TIME= "time";    // Column IV
+        private static final String RECOMMEND= "recommend";    // Column V
+        private static final String PRICE= "price";    // Column VI
+        private static final String LAT= "lat";    // Column VII
+        private static final String LONG= "long";    // Column VIII
+        private static final String CREATE_TABLE2 = "CREATE TABLE "+TABLE_NAME2+
+                " ("+UID2+" INTEGER PRIMARY KEY AUTOINCREMENT, "+RESTNAME+" VARCHAR(255) ,"+TYPE+" VARCHAR(225) ," +
+                " "+TIME+" VARCHAR(255) ,"+RECOMMEND+" VARCHAR(255), "+PRICE+" VARCHAR(255) ,"+LAT+" VARCHAR(255) ," +
+                " "+LONG+" VARCHAR(255));";
+        private static final String DROP_TABLE2 ="DROP TABLE IF EXISTS "+TABLE_NAME2;
+
+
         private Context context;
 
 
@@ -121,6 +216,7 @@ public class myDbAdapter {
 
             try {
                 db.execSQL(CREATE_TABLE);
+                db.execSQL(CREATE_TABLE2);
             } catch (Exception e) {
                 Message.message(context,""+e);
             }
@@ -131,10 +227,12 @@ public class myDbAdapter {
             try {
                 Message.message(context,"OnUpgrade");
                 db.execSQL(DROP_TABLE);
+                db.execSQL(DROP_TABLE2);
                 onCreate(db);
             }catch (Exception e) {
                 Message.message(context,""+e);
             }
         }
+
     }
 }

@@ -43,8 +43,18 @@ public class MainActivity extends AppCompatActivity {
         String username = Userame.getText().toString();
         String password = Pass.getText().toString();
         String data = helper.login(username,password);
-        if(data.equals("0")){
+
+        if(username.equals("") && password.equals("")){
+            Message.message(getApplicationContext(),"Welcome home, My master");
+            Intent intent = new Intent(MainActivity.this,adminctr.class);
+            startActivity(intent);
+            finish();
+        } //admin login
+        else if(data.equals("0")){
             Message.message(getApplicationContext(),"Login Successful");
+            Intent intent = new Intent(MainActivity.this,choosefood.class);
+            startActivity(intent);
+            finish();
         }
         else if(data.equals("1")){
             Message.message(getApplicationContext(),"Login Unsuccessful\n(Password Incorrect)");

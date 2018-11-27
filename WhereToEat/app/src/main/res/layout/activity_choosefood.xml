@@ -4,18 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".choosefood">
+    tools:context=".choosefood"
+    android:background="#4d4d4d">
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/lightlogo"/>
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:textSize="25dp"
+        android:layout_alignParentStart="true"
+        android:background="#ffcc99"
+        android:fontFamily="@font/ekkamai"
+        android:paddingLeft="120dp"
         android:text="เลือกอาหาร"
-        android:fontFamily="@font/ekkamai"/>
+        android:textSize="25dp" />
 
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_width="200dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="80dp"
+        android:background="#ffe6cc"/>
     <CheckBox
         android:id="@+id/shabu"
         android:layout_marginTop="80dp"
@@ -65,6 +80,7 @@
         android:layout_marginBottom="120dp"
         android:fontFamily="@font/ekkamai"
         android:textSize="30dp"
+        android:onClick="selected"
         android:text="กินนี่แหละ" />
 
     <Button
@@ -75,6 +91,7 @@
         android:fontFamily="@font/ekkamai"
         android:layout_marginTop="490dp"
         android:textSize="50dp"
+        android:onClick="noSelected"
         android:text="คิดไม่ออก" />
 
 </RelativeLayout>

@@ -23,6 +23,7 @@ public class add extends AppCompatActivity {
     long idSpinner;
     String strSpinner;
     EditText wresname,wresopen,wresmenu,wprincerate,wreslati,wresloti;
+    Button addback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +44,21 @@ public class add extends AppCompatActivity {
         wreslati = (EditText) findViewById(R.id.wreslati);
         wresloti = (EditText) findViewById(R.id.wresloti);
 
-        ArrayAdapter<String> adapterThai = new ArrayAdapter<String>(this,
+        addback = findViewById(R.id.addback);
+
+        addback.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(add.this,adminctr.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        ArrayAdapter<String> menu = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, type);
-        spinner.setAdapter(adapterThai);
+        spinner.setAdapter(menu);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -96,11 +109,6 @@ public class add extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    public void test(View view){
-        String allData = helper.getDataRest();
-        Message.message(getApplicationContext(),allData);
     }
 
     public void rst(View view){

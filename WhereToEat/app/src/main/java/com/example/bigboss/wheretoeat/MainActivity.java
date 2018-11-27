@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         String password = Pass.getText().toString();
         String data = helper.login(username,password);
 
-        if(username.equals("") && password.equals("")){
+        if(username.equals("admin") && password.equals("password")){
             Message.message(getApplicationContext(),"Welcome home, My master");
             Intent intent = new Intent(MainActivity.this,adminctr.class);
             startActivity(intent);

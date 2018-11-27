@@ -4,18 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#4d4d4d"
     tools:context=".Register">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:text="Register"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/logo"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:background="#ffcc99"
         android:fontFamily="@font/ekkamai"
         android:textSize="25dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="206dp"
+        android:layout_above="@+id/btnSubmit"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="-250dp"
+        android:background="#ffe6cc" />
+
+    <TextView
+        android:id="@+id/textView99"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="#ffcc99"
+        android:fontFamily="@font/ekkamai"
+        android:textSize="25dp"
+        android:text="Register"/>
 
     <TextView
         android:id="@+id/txtUser"
@@ -24,7 +49,7 @@
         android:text="Username"
         android:textSize="20dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/ekkamai"
         android:layout_below="@+id/textView2"
         />
@@ -60,6 +85,7 @@
         android:layout_below="@+id/textView2"
         android:fontFamily="@font/ekkamai"
         android:layout_marginLeft="35dp"
+        android:layout_marginTop="28dp"
         android:layout_toRightOf="@+id/txtUser" />
 
     <EditText
@@ -87,19 +113,19 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:fontFamily="@font/ekkamai"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="250dp"
         android:onClick="addUser"
-        android:text="Submit" />
+        android:text="Confirm" />
 
     <Button
-        android:id="@+id/test"
-        android:layout_width="139dp"
+        android:id="@+id/regisback"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="213dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="260dp"
         android:fontFamily="@font/ekkamai"
-        android:onClick="viewdata"
-        android:text="test" />
+        android:text="Back" />
 
 </RelativeLayout>

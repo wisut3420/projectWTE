@@ -4,28 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".choosewhere">
+    tools:context=".choosewhere"
+    android:background="#4d4d4d">
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/lightlogo"/>
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:textSize="25dp"
-        android:text="เลือกร้านอาหาร"
-        android:fontFamily="@font/ekkamai"/>
-
-    <Button
-        android:id="@+id/choosewhere"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="120dp"
+        android:layout_alignParentStart="true"
+        android:background="#ffcc99"
         android:fontFamily="@font/ekkamai"
-        android:textSize="30dp"
-        android:text="ที่นี่แหละ" />
+        android:paddingLeft="100dp"
+        android:text="เลือกร้านอาหาร"
+        android:textSize="25dp" />
 
     <Button
         android:id="@+id/ranwhere"
@@ -35,13 +33,15 @@
         android:fontFamily="@font/ekkamai"
         android:layout_marginTop="460dp"
         android:textSize="50dp"
+        android:onClick="noWhere"
         android:text="คิดไม่ออก" />
 
     <LinearLayout
         android:layout_width="285dp"
         android:layout_height="241dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp">
+        android:layout_marginTop="70dp"
+        android:background="#ffe6cc">
 
         <ListView
             android:id="@+id/foodview"
@@ -53,7 +53,6 @@
             android:padding="20dp" />
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

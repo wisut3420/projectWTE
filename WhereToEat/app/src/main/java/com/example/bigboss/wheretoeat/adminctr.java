@@ -20,7 +20,8 @@ public class adminctr extends AppCompatActivity {
 
     myDbAdapter helper;
     ListView adminfoodview;
-    Button btnAdminfood, btnAdd;
+    Button btnAdd;
+    TextView btnAdminfood;
 
     Context context;
 
@@ -35,7 +36,7 @@ public class adminctr extends AppCompatActivity {
 
 
         String restArray = helper.showRestaurant();
-        String[] restSplit = restArray.split(" ");
+        String[] restSplit = restArray.split("__");
 
         adminfoodview = (ListView)findViewById(R.id.adminfoodview);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_adminfoodview, R.id.btnAdminfood, restSplit);
@@ -54,9 +55,11 @@ public class adminctr extends AppCompatActivity {
         adminfoodview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                id=id+1;
+                TextView textView = (TextView) view.findViewById(R.id.btnAdminfood);
+                String text = textView.getText().toString();
+
                 Intent intent = new Intent(adminctr.this,edit.class);
-                intent.putExtra("id",(int) id);
+                intent.putExtra("name",text);
                 startActivity(intent);
                 finish();
             }
@@ -71,5 +74,11 @@ public class adminctr extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void backLogin(View view){
+        Intent intent = new Intent(adminctr.this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

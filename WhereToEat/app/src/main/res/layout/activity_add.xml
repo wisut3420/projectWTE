@@ -4,26 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".add">
+    tools:context=".add"
+    android:background="#4d4d4d">
 
     <TextView
         android:id="@+id/txtAdd"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="เพิ่ม"
-        android:layout_centerHorizontal="true"
+        android:paddingTop="5dp"
+        android:paddingLeft="158dp"
+        android:layout_marginTop="2dp"
+        android:background="#ffcc99"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
         android:fontFamily="@font/ekkamai"
-        android:textStyle="bold"
-        android:textSize="25dp" />
+        android:text="เพิ่ม"
+        android:textSize="25dp"
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:id="@+id/txtRela"
+        android:paddingLeft="5dp"
         android:layout_width="320dp"
         android:layout_height="380dp"
         android:layout_below="@+id/txtAdd"
         android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:background="#ffe6cc">
         <TextView
             android:id="@+id/txtRestype"
             android:layout_marginTop="3dp"
@@ -56,6 +62,7 @@
             android:layout_below="@+id/wrestype"
             android:layout_marginLeft="56dp"
             android:layout_toRightOf="@id/txtResName"
+            android:textSize="15dp"
             android:fontFamily="@font/ekkamai"
             android:inputType="text" />
         <TextView
@@ -72,6 +79,7 @@
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_below="@+id/wresname"
+            android:textSize="15dp"
             android:layout_marginLeft="56dp"
             android:layout_toRightOf="@id/txtResName"
             android:fontFamily="@font/ekkamai"
@@ -89,15 +97,16 @@
         <EditText
             android:id="@+id/wresmenu"
             android:layout_width="200dp"
-            android:layout_height="150dp"
-            android:layout_below="@+id/wresopen"
+            android:layout_height="120dp"
+            android:paddingTop="20dp"
+            android:layout_alignBaseline="@+id/txtResMenu"
             android:layout_alignStart="@+id/wrestype"
             android:fontFamily="@font/ekkamai"
             android:inputType="textMultiLine"
             android:textSize="15dp" />
         <TextView
             android:id="@+id/txtPriceRate"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="80dp"
             android:layout_below="@+id/txtResMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,6 +119,7 @@
             android:layout_height="40dp"
             android:layout_below="@+id/wresmenu"
             android:layout_marginLeft="56dp"
+            android:textSize="15dp"
             android:layout_toRightOf="@id/txtResName"
             android:fontFamily="@font/ekkamai"
             android:inputType="text" />
@@ -127,10 +137,11 @@
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_below="@+id/wprincerate"
+            android:textSize="15dp"
             android:layout_marginLeft="56dp"
             android:layout_toRightOf="@id/txtResName"
             android:fontFamily="@font/ekkamai"
-            android:inputType="number" />
+            android:inputType="text" />
         <TextView
             android:id="@+id/txtResLoti"
             android:layout_marginTop="10dp"
@@ -145,36 +156,43 @@
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_below="@+id/wreslati"
+            android:textSize="15dp"
             android:layout_marginLeft="56dp"
             android:layout_toRightOf="@id/txtResName"
             android:fontFamily="@font/ekkamai"
-            android:inputType="number" />
+            android:inputType="text" />
     </RelativeLayout>
 
     <Button
         android:id="@+id/btnAddres"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtRela"
-        android:text="Submit"/>
-    <Button
-        android:id="@+id/btnReset"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnAddres"
-        android:onClick="rst"
-        android:text="Reset"/>
-
-
-    <Button
-        android:id="@+id/test"
-        android:layout_width="56dp"
-        android:layout_height="63dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/txtRela"
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="-67dp"
-        android:onClick="test"
+        android:layout_marginTop="12dp"
+        android:background="#66ccff"
         android:text="Submit" />
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/btnAddres"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="12dp"
+        android:background="#F3143D"
+        android:onClick="rst"
+        android:text="Reset" />
+
+    <Button
+        android:id="@+id/addback"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/back" />
 
 </RelativeLayout>

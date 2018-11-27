@@ -1,7 +1,9 @@
 package com.example.bigboss.wheretoeat;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,11 +15,22 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class map extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    Double lg,lt;
+    String nameMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle != null) {
+            nameMap = bundle.getString("name");
+            lg = bundle.getDouble("long");
+            lt = bundle.getDouble("lat");
+        }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -39,8 +52,15 @@ public class map extends FragmentActivity implements OnMapReadyCallback {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(16.488853, 102.820887);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        LatLng sydney = new LatLng(lt, lg);
+        mMap.addMarker(new MarkerOptions().position(sydney).title(nameMap));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+
+    public void backMap(View view){
+        Intent intent = new Intent(map.this,choosefood.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class Register extends AppCompatActivity {
 
-    myDbAdapter helper;
+    testHelper helper;
     EditText Userame,Pass,rePass;
     Button regisback;
 
@@ -24,7 +24,7 @@ public class Register extends AppCompatActivity {
         Userame= (EditText) findViewById(R.id.inputUname);
         Pass= (EditText) findViewById(R.id.inputPass);
         rePass= (EditText) findViewById(R.id.inputConfPass);
-        helper = new myDbAdapter(this);
+        helper = new testHelper(this);
 
         regisback.setOnClickListener(new View.OnClickListener(){
 
@@ -51,7 +51,7 @@ public class Register extends AppCompatActivity {
         }
         else
         {
-            long id = helper.register(t1,t2);
+            int id = helper.register(t1,t2);
             if(id<=0)
             {
                 Message.message(getApplicationContext(),"Register Unsuccessful");

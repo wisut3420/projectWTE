@@ -95,6 +95,7 @@
         android:layout_below="@+id/inputUname"
         android:layout_marginLeft="35dp"
         android:fontFamily="@font/ekkamai"
+        android:inputType="textPassword"
         android:layout_toRightOf="@+id/txtUser" />
 
     <EditText
@@ -104,6 +105,7 @@
         android:layout_below="@+id/inputPass"
         android:layout_marginLeft="35dp"
         android:fontFamily="@font/ekkamai"
+        android:inputType="textPassword"
         android:layout_toRightOf="@+id/txtUser" />
 
     <Button

@@ -315,24 +315,7 @@ public class myDbAdapter {
         return buffer.toString();
     }
 
-    /*public  int delete(String uname)
-    {
-        SQLiteDatabase db = myhelper.getWritableDatabase();
-        String[] whereArgs ={uname};
-
-        int count =db.delete(myDbHelper.TABLE_NAME , myDbHelper.USERNAME+" = ?",whereArgs);
-        return  count;
-    }
-
-    public int updateName(String oldName , String newName)
-    {
-        SQLiteDatabase db = myhelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(myDbHelper.USERNAME,newName);
-        String[] whereArgs= {oldName};
-        int count =db.update(myDbHelper.TABLE_NAME,contentValues, myDbHelper.USERNAME+" = ?",whereArgs );
-        return count;
-    }*/
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     static class myDbHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "myDatabase";    // Database Name
@@ -355,9 +338,9 @@ public class myDbAdapter {
         private static final String RECOMMEND = "recommend";    // Column V
         private static final String PRICE = "price";    // Column VI
         private static final String LAT = "lat";    // Column VII
-        private static final String LONG = "long";    // Column VIII
+        private static final String LONG = "longt";    // Column VIII
         private static final String CREATE_TABLE2 = "CREATE TABLE " + TABLE_NAME2 +
-                " (" + UID2 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + RESTNAME + " VARCHAR(255) ," + TYPE + " VARCHAR(225) ," +
+                " (" + UID2 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + RESTNAME + " VARCHAR(255) ," + TYPE + " VARCHAR(255) ," +
                 " " + TIME + " VARCHAR(255) ," + RECOMMEND + " VARCHAR(255), " + PRICE + " VARCHAR(255) ," + LAT + " VARCHAR(255) ," +
                 " " + LONG + " VARCHAR(255));";
         private static final String DROP_TABLE2 = "DROP TABLE IF EXISTS " + TABLE_NAME2;

@@ -8,14 +8,25 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btnLogin,btnRegis;
     myDbAdapter helper;
     EditText Userame,Pass;
+    testHelper mySQLConnect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /*List<String> b = mySQLConnect.getData();
+        StringBuilder strB = new StringBuilder();
+        for(String f : b){
+            strB.append(f);
+            strB.append(",");
+        }
+        String o = String.valueOf(strB);*/
+
         helper = new myDbAdapter(this);
 
         super.onCreate(savedInstanceState);
@@ -24,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnLogin = findViewById(R.id.btnLogin);
         Button btnRegis = findViewById(R.id.btnRegis);
+
+
+        mySQLConnect = new testHelper(MainActivity.this);
+        mySQLConnect.getData();
 
         btnRegis.setOnClickListener(new View.OnClickListener(){
 
@@ -63,6 +78,17 @@ public class MainActivity extends AppCompatActivity {
         else if(data.equals("2")){
             Message.message(getApplicationContext(),"Login Unsuccessful\n(No Username... I suppose.)");
         }
+    }
+
+    public void test(View view){
+        /*List<String> b = a.getData();
+        StringBuilder strB = new StringBuilder();
+        for(String f : b){
+            strB.append(f);
+            strB.append(",");
+        }
+        String o = String.valueOf(strB);
+        Message.message(getApplicationContext(),o);*/
     }
 
 

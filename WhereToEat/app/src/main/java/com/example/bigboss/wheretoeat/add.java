@@ -18,7 +18,7 @@ public class add extends AppCompatActivity {
     private Spinner spinner;
     private ArrayList<String> type = new ArrayList<String>();
 
-    myDbAdapter helper;
+    testHelper helper;
     int sSpinner;
     long idSpinner;
     String strSpinner;
@@ -27,7 +27,7 @@ public class add extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        helper = new myDbAdapter(this);
+        helper = new testHelper(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         type.add("ชาบู");

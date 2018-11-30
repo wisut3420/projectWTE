@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnLogin,btnRegis;
     myDbAdapter helper;
     EditText Userame,Pass;
-    testHelper mySQLConnect;
+    myDbAdapter mySQLConnect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnRegis = findViewById(R.id.btnRegis);
 
 
-        mySQLConnect = new testHelper(MainActivity.this);
+        mySQLConnect = new myDbAdapter(MainActivity.this);
         mySQLConnect.getData();
 
         btnRegis.setOnClickListener(new View.OnClickListener(){

@@ -18,7 +18,7 @@ import java.util.List;
 
 public class adminctr extends AppCompatActivity {
 
-    myDbAdapter helper;
+    testHelper helper;
     ListView adminfoodview;
     Button btnAdd;
     TextView btnAdminfood;
@@ -27,7 +27,7 @@ public class adminctr extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        helper = new myDbAdapter(this);
+        helper = new testHelper(this);
         context=this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adminctr);

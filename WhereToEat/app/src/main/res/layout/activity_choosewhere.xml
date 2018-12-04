@@ -22,7 +22,7 @@
         android:background="#ffcc99"
         android:fontFamily="@font/ekkamai"
         android:paddingLeft="100dp"
-        android:text="เลือกร้านอาหาร"
+        android:text="Choose Restaurant"
         android:textSize="25dp" />
 
     <Button
@@ -34,7 +34,7 @@
         android:layout_marginTop="460dp"
         android:textSize="50dp"
         android:onClick="noWhere"
-        android:text="คิดไม่ออก" />
+        android:text="Don't know" />
 
     <LinearLayout
         android:layout_width="285dp"

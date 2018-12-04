@@ -22,7 +22,7 @@
         android:background="#ffcc99"
         android:fontFamily="@font/ekkamai"
         android:paddingLeft="120dp"
-        android:text="เลือกอาหาร"
+        android:text="Choose Food"
         android:textSize="25dp" />
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="ชาบู"
+        android:text="Shabu"
         android:fontFamily="@font/ekkamai"/>
 
     <CheckBox
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="หมูกระทะ"
+        android:text="BBQ"
         android:fontFamily="@font/ekkamai"/>
 
     <CheckBox
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="อาหารตามสั่ง"
+        android:text="Order"
         android:fontFamily="@font/ekkamai"/>
 
     <CheckBox
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="ก๋วยเตี๋ยว"
+        android:text="Noodle"
         android:fontFamily="@font/ekkamai"/>
 
     <Button
@@ -81,7 +81,7 @@
         android:fontFamily="@font/ekkamai"
         android:textSize="30dp"
         android:onClick="selected"
-        android:text="กินนี่แหละ" />
+        android:text="Eat" />
 
     <Button
         android:id="@+id/ranwfood"
@@ -92,6 +92,6 @@
         android:layout_marginTop="490dp"
         android:textSize="50dp"
         android:onClick="noSelected"
-        android:text="คิดไม่ออก" />
+        android:text="Don't know" />
 
 </RelativeLayout>

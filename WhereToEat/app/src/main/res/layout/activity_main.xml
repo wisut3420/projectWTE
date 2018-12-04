@@ -69,7 +69,7 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/logo"/>
 
-    <Button
+    Button
         android:id="@+id/btnTest"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="183dp"

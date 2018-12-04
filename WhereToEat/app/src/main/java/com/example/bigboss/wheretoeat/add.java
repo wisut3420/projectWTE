@@ -30,10 +30,10 @@ public class add extends AppCompatActivity {
         helper = new testHelper(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        type.add("ชาบู");
-        type.add("หมูกระทะ");
-        type.add("อาหารตามสั่ง");
-        type.add("ก๋วยเตี๋ยว");
+        type.add("Shabu");
+        type.add("BBQ");
+        type.add("Order");
+        type.add("Noodle");
 
         spinner = (Spinner) findViewById(R.id.wrestype);
 
@@ -78,16 +78,16 @@ public class add extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 if(sSpinner==0){
-                    strSpinner="ชาบู";
+                    strSpinner="Shabu";
                 }
                 else if(sSpinner==1){
-                    strSpinner="หมูกระทะ";
+                    strSpinner="BBQ";
                 }
                 else if(sSpinner==2){
-                    strSpinner="อาหารตามสั่ง";
+                    strSpinner="Order";
                 }
                 else if(sSpinner==3){
-                    strSpinner="ก๋วยเตี๋ยว";
+                    strSpinner="Noodle";
                 }
 
                 String name = wresname.getText().toString();

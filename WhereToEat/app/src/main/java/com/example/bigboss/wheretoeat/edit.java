@@ -1,6 +1,7 @@
 package com.example.bigboss.wheretoeat;
 
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.system.ErrnoException;
@@ -9,8 +10,25 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONArrayRequestListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 
 public class edit extends AppCompatActivity {
 
@@ -18,6 +36,7 @@ public class edit extends AppCompatActivity {
     private Spinner spinner;
     private ArrayList<String> type = new ArrayList<String>();
     EditText name,time,recommend,price,lat,longt;
+    TextView id;
     int sSpinner;
     long idSpinner;
     String strSpinner;
@@ -29,7 +48,7 @@ public class edit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-
+        id = (TextView) findViewById(R.id.idRest);
         name = (EditText) findViewById(R.id.wresname);
         time = (EditText) findViewById(R.id.wresopen);
         recommend = (EditText) findViewById(R.id.wresmenu);
@@ -37,10 +56,10 @@ public class edit extends AppCompatActivity {
         lat = (EditText) findViewById(R.id.wreslati);
         longt = (EditText) findViewById(R.id.wresloti);
 
-        type.add("ชาบู");
-        type.add("หมูกระทะ");
-        type.add("อาหารตามสั่ง");
-        type.add("ก๋วยเตี๋ยว");
+        type.add("Shabu");
+        type.add("BBQ");
+        type.add("Order");
+        type.add("Noodle");
 
         spinner = (Spinner) findViewById(R.id.wrestype);
         ArrayAdapter<String> menu = new ArrayAdapter<String>(this,
@@ -49,32 +68,13 @@ public class edit extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String nameEdit;
+
         if(bundle != null){
             nameEdit = bundle.getString("name");
-            String rest = helper.showEdit(nameEdit);
-            String[] restSplit = rest.split("__");
-            if(restSplit[1].equals("ชาบู")){
-                spinner.setSelection(0);
-            } else if(restSplit[1].equals("หมูกระทะ")){
-                spinner.setSelection(1);
-            } else if(restSplit[1].equals("อาหารตามสั่ง")){
-                spinner.setSelection(2);
-            } else if(restSplit[1].equals("ก๋วยเตี๋ยว")){
-                spinner.setSelection(3);
-            }
+            Message.message(getApplicationContext(),"Receive!!:"+nameEdit);
 
-            idMain = restSplit[0];
+            setShow(nameEdit);
 
-            try {
-                name.setText(restSplit[2]);
-                time.setText(restSplit[3]);
-                recommend.setText(restSplit[4]);
-                price.setText(restSplit[5]);
-                lat.setText(restSplit[6]);
-                longt.setText(restSplit[7]);
-            }catch (Exception e){
-                Message.message(getApplicationContext(), "Something wrong...\n"+e);
-            }
 
         }
     }
@@ -93,36 +93,152 @@ public class edit extends AppCompatActivity {
             }
         });
         if(sSpinner==0){
-            strSpinner="ชาบู";
+            strSpinner="Shabu";
         }
         else if(sSpinner==1){
-            strSpinner="หมูกระทะ";
+            strSpinner="BBQ";
         }
         else if(sSpinner==2){
-            strSpinner="อาหารตามสั่ง";
+            strSpinner="Order";
         }
         else if(sSpinner==3){
-            strSpinner="ก๋วยเตี๋ยว";
+            strSpinner="Noodle";
         }
 
+        String id2 = id.getText().toString();
         String name2 = name.getText().toString();
         String time2 = time.getText().toString();
         String recommend2 = recommend.getText().toString();
         String price2 = price.getText().toString();
         String lat2 = lat.getText().toString();
         String longt2 = longt.getText().toString();
-        helper.editRestaurant(idMain,name2,strSpinner,time2,recommend2,price2,lat2,longt2);
-        Message.message(getApplicationContext(),"Edit Successful... Maybe");
+        ///
 
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            OkHttpClient client = new OkHttpClient();
+            HttpUrl.Builder urlBuilder = HttpUrl.parse( testHelper.URL + "/eatwhere/editRestaurant.php").newBuilder();
+            urlBuilder.addQueryParameter("id", id2);
+            urlBuilder.addQueryParameter("name", name2);
+            urlBuilder.addQueryParameter("time", time2);
+            urlBuilder.addQueryParameter("recommend", recommend2);
+            urlBuilder.addQueryParameter("price", price2);
+            urlBuilder.addQueryParameter("lat", lat2);
+            urlBuilder.addQueryParameter("longt", longt2);
+            String url = urlBuilder.build().toString();
+
+            okhttp3.Request request = new okhttp3.Request.Builder()
+                    .url(url)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, final okhttp3.Response response) throws IOException {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            try {
+
+                                try {
+
+                                    String data = response.body().string();
+                                    Message.message(getApplicationContext(),data);
+
+                                } catch (IOException e) {
+                                    Message.message(getApplicationContext(),e.toString());
+                                }
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+                }
+
+                ;
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        ///
         Intent intent = new Intent(edit.this,adminctr.class);
         startActivity(intent);
         finish();
     }
 
-    public void delete(View view){
-        helper.deleteRestaurant(idMain);
-        Message.message(getApplicationContext(),"Delete Successful... Maybe");
 
+    public void delete(View view){
+
+        String id2 = id.getText().toString();
+        ///
+
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            OkHttpClient client = new OkHttpClient();
+            HttpUrl.Builder urlBuilder = HttpUrl.parse( testHelper.URL + "/eatwhere/deleteRestaurant.php").newBuilder();
+            urlBuilder.addQueryParameter("id", id2);
+            String url = urlBuilder.build().toString();
+
+            okhttp3.Request request = new okhttp3.Request.Builder()
+                    .url(url)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, final okhttp3.Response response) throws IOException {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            try {
+
+                                try {
+
+                                    String data = response.body().string();
+                                    Message.message(getApplicationContext(),data);
+
+                                } catch (IOException e) {
+                                    Message.message(getApplicationContext(),e.toString());
+                                }
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+                }
+
+                ;
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        ///
         Intent intent = new Intent(edit.this,adminctr.class);
         startActivity(intent);
         finish();
@@ -132,6 +248,104 @@ public class edit extends AppCompatActivity {
         Intent intent = new Intent(edit.this,adminctr.class);
         startActivity(intent);
         finish();
+    }
+
+    public void setShow(String nameEdit){
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            OkHttpClient client = new OkHttpClient();
+            HttpUrl.Builder urlBuilder = HttpUrl.parse( testHelper.URL + "/eatwhere/edit.php").newBuilder();
+            urlBuilder.addQueryParameter("nameEdit", nameEdit);
+            String url = urlBuilder.build().toString();
+
+            okhttp3.Request request = new okhttp3.Request.Builder()
+                    .url(url)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, final okhttp3.Response response) throws IOException {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            try {
+
+                                try {
+
+                                    id = (TextView) findViewById(R.id.idRest);
+                                    name = (EditText) findViewById(R.id.wresname);
+                                    time = (EditText) findViewById(R.id.wresopen);
+                                    recommend = (EditText) findViewById(R.id.wresmenu);
+                                    price = (EditText) findViewById(R.id.wprincerate);
+                                    lat = (EditText) findViewById(R.id.wreslati);
+                                    longt = (EditText) findViewById(R.id.wresloti);
+
+                                    String data = response.body().string();
+
+                                    JSONArray jsonArray = new JSONArray(data);
+                                    JSONObject jsonObject;
+
+                                    jsonObject = jsonArray.getJSONObject(0);
+                                    String gid = (jsonObject.getString("id"));
+                                    String gname =(jsonObject.getString("name"));
+                                    String gtype =(jsonObject.getString("type"));
+                                    String gtime =(jsonObject.getString("time"));
+                                    String grecommend =(jsonObject.getString("recommend"));
+                                    String gprice =(jsonObject.getString("price"));
+                                    String glat =(jsonObject.getString("lat"));
+                                    String glongt =(jsonObject.getString("longt"));
+
+                                    Message.message(getApplicationContext(),"NAME : "+gname);
+
+                                    if(gtype.equals("Shabu")){
+                                        spinner.setSelection(0);
+                                    } else if(gtype.equals("BBQ")){
+                                        spinner.setSelection(1);
+                                    } else if(gtype.equals("Order")){
+                                        spinner.setSelection(2);
+                                    } else if(gtype.equals("Noodle")){
+                                        spinner.setSelection(3);
+                                    }
+
+                                    try {
+                                        id.setText(gid);
+                                        name.setText(gname);
+                                        time.setText(gtime);
+                                        recommend.setText(grecommend);
+                                        price.setText(gprice);
+                                        lat.setText(glat);
+                                        longt.setText(glongt);
+                                    }catch (Exception e){
+                                        Message.message(getApplicationContext(), "Something wrong...\n"+e);
+                                    }
+
+                                } catch (IOException e) {
+                                    Message.message(getApplicationContext(),e.toString());
+                                }
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+                }
+
+                ;
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

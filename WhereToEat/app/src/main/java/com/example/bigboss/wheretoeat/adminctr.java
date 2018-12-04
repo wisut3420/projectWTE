@@ -14,6 +14,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONArrayRequestListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class adminctr extends AppCompatActivity {
@@ -23,30 +33,34 @@ public class adminctr extends AppCompatActivity {
     Button btnAdd;
     TextView btnAdminfood;
 
+    public String name;
     Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         helper = new testHelper(this);
-        context=this;
+        context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adminctr);
 
         btnAdd = findViewById(R.id.btnAdd);
 
 
-        String restArray = helper.showRestaurant();
-        String[] restSplit = restArray.split("__");
+        getList();
+
+        adminfoodview = (ListView)findViewById(R.id.adminfoodview);
+        /*String[] restSplit = restArray.split("__");
 
         adminfoodview = (ListView)findViewById(R.id.adminfoodview);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_adminfoodview, R.id.btnAdminfood, restSplit);
-        adminfoodview.setAdapter(arrayAdapter);
+        adminfoodview.setAdapter(arrayAdapter);*/
 
-        btnAdd.setOnClickListener(new View.OnClickListener(){
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
-                Intent intent = new Intent(adminctr.this,add.class);
+            public void onClick(View view) {
+                Intent intent = new Intent(adminctr.this, add.class);
                 startActivity(intent);
                 finish();
             }
@@ -80,5 +94,59 @@ public class adminctr extends AppCompatActivity {
         Intent intent = new Intent(adminctr.this,MainActivity.class);
         startActivity(intent);
         finish();
+
     }
+
+    public void setList(String restArray){
+        String[] restSplit = restArray.split("__");
+
+        adminfoodview = (ListView)findViewById(R.id.adminfoodview);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_adminfoodview, R.id.btnAdminfood, restSplit);
+        adminfoodview.setAdapter(arrayAdapter);
+    }
+
+    public void getList(){
+
+        AndroidNetworking.get(testHelper.URL+"/eatwhere/getRest.php")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        JSONObject jo;
+                        try
+                        {
+                            name="";
+                            for(int i=0;i<response.length();i++)
+                            {
+                                jo=response.getJSONObject(i);
+
+                                String nameGet=jo.getString("name");
+
+                                name=name+nameGet+"__";
+
+
+                            }
+
+
+                            setList(name);
+
+
+                            //SET TO SPINNER
+
+                        }catch (JSONException e)
+                        {
+                            Toast.makeText(getApplicationContext(), "GOOD RESPONSE BUT JAVA CAN'T PARSE JSON IT RECEIEVED. "+e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    //ERROR
+                    @Override
+                    public void onError(ANError anError) {
+                        anError.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "UNSUCCESSFUL :  ERROR IS : "+anError.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                });
+    }
+
 }

@@ -17,7 +17,7 @@
         android:layout_height="48dp"
         android:layout_alignParentStart="true"
         android:fontFamily="@font/ekkamai"
-        android:text="เแก้ไข-ลบ"
+        android:text="Edit/Delete"
         android:textSize="25dp"
         android:textStyle="bold" />
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:fontFamily="@font/ekkamai"
-            android:text="ประเภทร้าน"/>
+            android:text="Type"/>
         <Spinner
             android:id="@+id/wrestype"
             android:layout_toRightOf="@id/txtRestype"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:fontFamily="@font/ekkamai"
-            android:text="ชื่อร้าน"/>
+            android:text="Name"/>
         <EditText
             android:id="@+id/wresname"
             android:layout_width="200dp"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:fontFamily="@font/ekkamai"
-            android:text="เวลาทำการ"/>
+            android:text="Open Time"/>
         <EditText
             android:id="@+id/wresopen"
             android:layout_width="200dp"
@@ -84,15 +84,16 @@
             android:textSize="15dp"
             android:fontFamily="@font/ekkamai"
             android:inputType="text" />
+
         <TextView
             android:id="@+id/txtResMenu"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/txtResOpen"
-            android:layout_width="wrap_content"
+            android:layout_width="99dp"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:layout_below="@+id/txtResOpen"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/ekkamai"
-            android:text="เมนูแนะนำ"/>
+            android:text="Recommend Menu"
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/wresmenu"
@@ -105,15 +106,17 @@
             android:fontFamily="@font/ekkamai"
             android:inputType="textMultiLine"
             android:textSize="15dp" />
+
         <TextView
             android:id="@+id/txtPriceRate"
-            android:layout_marginTop="78dp"
-            android:layout_below="@+id/txtResMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:layout_below="@+id/txtResMenu"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="37dp"
             android:fontFamily="@font/ekkamai"
-            android:text="ช่วงราคา"/>
+            android:text="Rate Price"
+            android:textSize="20dp" />
         <EditText
             android:id="@+id/wprincerate"
             android:layout_width="200dp"
@@ -162,6 +165,15 @@
             android:fontFamily="@font/ekkamai"
             android:textSize="15dp"
             android:inputType="number" />
+
+        <TextView
+            android:id="@+id/idRest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="156dp" />
     </RelativeLayout>
 
     <Button

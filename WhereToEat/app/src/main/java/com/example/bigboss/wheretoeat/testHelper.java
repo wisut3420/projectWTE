@@ -2,6 +2,7 @@ package com.example.bigboss.wheretoeat;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.StrictMode;
 import android.widget.Toast;
@@ -28,6 +29,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+
 public class testHelper {
 
     public final Activity main;
@@ -36,9 +42,8 @@ public class testHelper {
     Context context;
     private JSONArray result;
     testHelper helper;
-    private StringBuffer buffer;
-    private String URL = "http://192.168.88.133/", GET_URL = "eatwhere/get_user.php", Register_URL = "eatwhere/register.php";
-
+    public StringBuffer buffer = new StringBuffer();
+    static String URL = "http://192.168.43.149/", GET_URL = "eatwhere/get_user.php", Register_URL = "eatwhere/register.php";
 
 
     public testHelper(Activity mainA) {
@@ -157,47 +162,6 @@ public class testHelper {
         }
     }
 
-
-    public String showRestaurant() {
-
-            String url = URL + "eatwhere/getRest.php";
-
-            StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    buffer = new StringBuffer();
-
-                    String show = "";
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        JSONArray result = jsonObject.getJSONArray("result");
-
-                        for (int i = 0; i < result.length(); i++) {
-                            JSONObject collectData = result.getJSONObject(i);
-                            show = collectData.getString("name");
-                            list.add(show);
-                            buffer.append(show+"__");
-                        }
-                    } catch (JSONException ex) {
-                        ex.printStackTrace();
-                    }
-
-
-                    Toast.makeText(main, list.get(0), Toast.LENGTH_LONG).show();
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(main, error.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-            RequestQueue requestQueue = Volley.newRequestQueue(main.getApplicationContext());
-            requestQueue.add(stringRequest);
-
-            return buffer.toString();
-
-        }
 
 
 
